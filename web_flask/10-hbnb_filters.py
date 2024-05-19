@@ -3,26 +3,29 @@
 script that starts a Flask web application
 """
 from flask import Flask, render_template
+from models import *
 from models import storage
 
 app = Flask(__name__)
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def citiesByStates():
+@app.route('/hbnb_filters', strict_slashes=False)
+def filterAmenities():
     """
-    cities by states
+    display a HTML page like 6-index.html
     """
     states = storage.all("State").values()
-    return render_template("8-cities_by_states.html", states=states)
+    amen = storage.all("Amenity").values()
+    return render_template('10-hbnb_filters.html', states=states, amen=amen)
 
 
 @app.teardown_appcontext
 def teardown(exception):
     """
-    close storage
+    storage close
     """
     storage.close()
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
