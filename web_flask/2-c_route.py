@@ -28,7 +28,7 @@ def cIsFun(text):
     """
     display C followed by the value of the <text>
     """
-    return "C {}".format(text)
+    return "C " + text.replace('_', ' ')
 
 
 if __name__ == "__main__":
